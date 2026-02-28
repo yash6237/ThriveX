@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThriveX | Elite Trade Show Experiences</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+html{scroll-behavior:smooth}
+body{background:#070b10;color:#fff;overflow-x:hidden}
+
+/* --- FIXED TOP LEFT LOGO (STAYS IN PLACE) --- */
+.logo-container {
+    position: fixed; /* Keeps it pinned while scrolling */
+    top: 40px;
+    left: 5%;
+    z-index: 2000; /* Higher than the navbar and everything else */
+    pointer-events: auto;
+}
+
+.logo-img {
+    height: 55px;
+    transition: 0.3s ease;
+    /* Subtle glow to keep it readable over dark/light backgrounds */
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.8)); 
+}
+
+.logo-container:hover .logo-img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(0,255,136,0.3));
+}
+
+/* --- FLOATING NAV PILL --- */
+header {
+    position: fixed;
+    top: 40px;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 30px;
+    background: rgba(15,20,27,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #bbb;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    transition: 0.4s;
+}
+
+nav a:hover { color: #00ff88; }
+
+.btn {
+    background: linear-gradient(45deg,#00ff88,#00c26e);
+    padding: 10px 22px;
+    border-radius: 40px;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,255,136,0.4);
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+    z-index: -1;
+}
+
+.hero-title {
+    font-size: 85px;
+    font-weight: 800;
+    max-width: 1200px;
+    line-height: 1;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+}
+
+.hero-title span {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #ffffff;
+}
+
+.hero-sub {
+    margin: 30px 0;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #00ff88;
+}
+
+section { padding: 120px 8%; }
+h2 { text-align: center; font-size: 45px; margin-bottom: 70px; font-weight: 700; letter-spacing: -1px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.card { 
+    background: #0f141b; 
+    padding: 60px 40px; 
+    border-radius: 5px; /* Sharp edges look more premium in architecture */
+    border-left: 3px solid #00ff88;
+    transition: 0.4s ease; 
+}
+.card:hover { transform: translateY(-10px); background: #161d26; }
+.card h3 { margin-bottom: 15px; font-size: 24px; }
+
+.stats { background: #000; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
+.stat h3 { font-size: 65px; color: #00ff88; font-weight: 800; }
+
+footer { background: #05080c; text-align: center; padding: 60px; color: #444; font-size: 12px; letter-spacing: 2px; }
+
+/* MOBILE RESPONSIVENESS */
+@media(max-width: 992px) {
+    .hero-title { font-size: 50px; }
+    header { top: auto; bottom: 20px; left: 5%; right: 5%; justify-content: space-between; }
+    .logo-container { top: 20px; left: 20px; }
+    .logo-img { height: 40px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo-container">
+    <a href="#">
+        <img src="{{ url_for('static', filename='thrivex.png') }}" class="logo-img" alt="ThriveX Logo">
+    </a>
+</div>
+
+<header>
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#stats">Impact</a>
+    </nav>
+    <a href="#contact" class="btn">Consult</a>
+</header>
+
+<div class="hero">
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="{{ url_for('static', filename='trade-show-bg.mp4') }}" type="video/mp4">
+    </video>
+
+    <h1 class="hero-title">
+        ELEVATING <span>THE EXHIBITION</span> STANDARD
+    </h1>
+
+    <p class="hero-sub">Architecture • Strategy • Activation</p>
+
+    <a href="#services" class="btn" style="padding: 15px 40px; margin-top: 20px;">View Portfolio</a>
+</div>
+
+<section id="services">
+    <h2>Capabilities</h2>
+    <div class="grid">
+        <div class="card"><h3>Exhibition Design</h3><p>Bespoke environments that tell your brand story through structural excellence.</p></div>
+        <div class="card"><h3>Global Logistics</h3><p>Seamless execution and operational management on every continent.</p></div>
+        <div class="card"><h3>Digital Integration</h3><p>Merging physical spaces with interactive technology for maximum impact.</p></div>
+    </div>
+</section>
+
+<section id="stats" class="stats">
+    <div class="stats-grid">
+        <div class="stat"><h3 class="counter" data-target="250">0</h3><p>PROJECTS</p></div>
+        <div class="stat"><h3 class="counter" data-target="15">0</h3><p>YEARS</p></div>
+        <div class="stat"><h3 class="counter" data-target="120">0</h3><p>CLIENTS</p></div>
+        <div class="stat"><h3 class="counter" data-target="98">0</h3><p>SATISFACTION %</p></div>
+    </div>
+</section>
+
+<footer>
+    © 2026 THRIVEX. ELITE TRADE SHOW EXPERIENCES.
+</footer>
+
+<script>
+// Logic for the counting animation
+const counters = document.querySelectorAll('.counter');
+let activated = false;
+
+function animateCounters() {
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const isPercent = counter.parentElement.innerText.includes('%');
+        let current = 0;
+        const duration = 2000; 
+        const startTime = performance.now();
+
+        function update(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            current = Math.floor(progress * target);
+            counter.innerText = current + (isPercent ? '%' : '+');
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    });
+}
+
+window.addEventListener('scroll', () => {
+    const statsSection = document.getElementById('stats');
+    if(!statsSection) return;
+    const sectionTop = statsSection.offsetTop - window.innerHeight + 100;
+    if (!activated && window.scrollY > sectionTop) {
+        animateCounters();
+        activated = true;
+    }
+});
+</script>
+
+</body>
+</html>
